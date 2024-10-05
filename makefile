@@ -1,7 +1,6 @@
 clean:
 	rm -rf ./build \
-	rm tsconfig.tsbuildinfo \
-	rm tsconfig.release.tsbuildinfo
+	rm tsconfig.tsbuildinfo
 
 test:
 	clear \

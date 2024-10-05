@@ -1,7 +1,7 @@
 import defaultConfig from './jest.config.default';
-import { Config } from 'jest'
+import { JestConfigWithTsJest } from 'ts-jest'
 
-const config: Config = {
+const config: JestConfigWithTsJest = {
   ...defaultConfig,
   roots: ['./e2e'],
 };
