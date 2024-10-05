@@ -84,7 +84,7 @@ jobs:
             ${{ runner.OS }}-node-
 
       - name: Download config
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: config
           path: config/
@@ -115,7 +115,7 @@ jobs:
             ${{ runner.OS }}-node-
 
       - name: Download config
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: config
           path: config/
@@ -147,7 +147,7 @@ jobs:
             ${{ runner.OS }}-node-
 
       - name: Download config
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: config
           path: config/
