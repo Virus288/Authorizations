@@ -1,14 +1,15 @@
 class App {
   init(): void {
     this.handleInit().catch((err) => {
-      console.error("Got err while initializing app", err);
+      console.info('Got err while initializing app', err);
     });
   }
 
   private async handleInit(): Promise<void> {
-    return new Promise(resolve => {
-      console.log('Server', 'Server started');
-    })
+    return new Promise((resolve) => {
+      console.info('Server', 'Server started');
+      resolve();
+    });
   }
 }
 
