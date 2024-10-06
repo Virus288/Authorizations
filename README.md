@@ -63,5 +63,4 @@ yarn test:watch = run tests in 'watch' mode
 
 ### 5. Additional notes
 
-This service uses oidc as authorization system. Migrations starting in docker image will initialize database and also
-default client called `oidcClient` with random password. Remember to adjust its data to your preferences
+This service uses oidc as authorization system
