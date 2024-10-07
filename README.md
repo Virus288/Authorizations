@@ -64,3 +64,5 @@ yarn test:watch = run tests in 'watch' mode
 ### 5. Additional notes
 
 This service uses oidc as authorization system
+
+In order to run this project on most environments, I used to include cross-env. Sadlu this package seems to be crashing on latest github pipelines, so I removed it. If you are going to work on this project on windows, make sure to add it for NODE_ENV application, or use other ways to add envs

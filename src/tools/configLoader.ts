@@ -10,7 +10,7 @@ export default function getConfig(): types.IConfigInterface {
   switch (process.env.NODE_ENV) {
     case 'testDev':
       return JSON.parse(fs.readFileSync('./config/testConfig.json').toString()) as types.IConfigInterface;
-    case 'dev':
+    case 'development':
     case 'test':
       return JSON.parse(fs.readFileSync('./config/devConfig.json').toString()) as types.IConfigInterface;
     case 'production':
