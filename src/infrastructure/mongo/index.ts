@@ -12,7 +12,7 @@ export default class Mongo {
     await mongoose.disconnect();
   }
 
-  private async startServer(): Promise<void> {
+  protected async startServer(): Promise<void> {
     Log.debug('Mongo', 'Connecting to mongo');
 
     await mongoose.connect(getConfig().mongoURI, {

@@ -17,11 +17,10 @@ export default class GetUsers {
   }
 
   init(): void {
-    this.router.get('/', async (req, res) => {
+    this.router.post('/', async (req, res) => {
       try {
-        const controller = State.controllers.resolve(EControllers.Users)!.resolve(EControllerActions.Get)!;
+        const controller = State.controllers.resolve(EControllers.Users)!.resolve(EControllerActions.Add)!;
         await controller.handle(req, res);
-        res.status(200).send();
       } catch (err) {
         handleErr(err as types.IFullError, res);
       }

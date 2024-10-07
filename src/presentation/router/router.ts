@@ -1,4 +1,6 @@
 import initUserRoutes from './modules/users/index.js';
+import { FourOhFour } from '../../errors/index.js';
+import handleErr from '../../errors/utils.js';
 import type { Router } from 'express';
 
 export default class AppRouter {
@@ -14,5 +16,13 @@ export default class AppRouter {
 
   initRoutes(): void {
     initUserRoutes(this.router);
+
+    this.initFourOhFour();
+  }
+
+  initFourOhFour(): void {
+    this.router.all('*', (_req, res) => {
+      handleErr(new FourOhFour(), res);
+    });
   }
 }

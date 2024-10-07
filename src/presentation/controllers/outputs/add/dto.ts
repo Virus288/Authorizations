@@ -11,6 +11,6 @@ export default class AddUserDto implements IAddUserDto {
   }
 
   private validate(): void {
-    new Validation(this.name, 'name').isDefined().isString();
+    new Validation(this.name, 'name').isDefined().isString().hasMinLength(1);
   }
 }

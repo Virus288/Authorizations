@@ -17,9 +17,9 @@ export default class AddUsers {
   }
 
   init(): void {
-    this.router.post('/', async (req, res) => {
+    this.router.get('/', async (req, res) => {
       try {
-        const controller = State.controllers.resolve(EControllers.Users)!.resolve(EControllerActions.Add)!;
+        const controller = State.controllers.resolve(EControllers.Users)!.resolve(EControllerActions.Get)!;
         await controller.handle(req, res);
       } catch (err) {
         handleErr(err as types.IFullError, res);

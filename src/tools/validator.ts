@@ -189,6 +189,22 @@ export default class Validation {
   }
 
   /**
+   * Validate if element's length is bigger than x
+   * Require param: string.
+   * @param length Minimum length.
+   * @returns {this} This.
+   * @throws {errors.ElementTooShortError} Error whenever data is incorrect length.
+   */
+  hasMinLength(length: number): this {
+    const { v, name } = this;
+    const value = v as string;
+
+    if (value.length < length) throw new errors.ElementTooShortError(name, length);
+
+    return this;
+  }
+
+  /**
    * Validate if element is smaller than x and bigger than y
    * Require param: number.
    * @param max Max allowed size.

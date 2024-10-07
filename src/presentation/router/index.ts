@@ -33,6 +33,10 @@ export default class Router {
     return this._server!;
   }
 
+  getServer(): http.Server {
+    return this.server;
+  }
+
   init(): void {
     Log.debug('Router', 'Initializing');
 
@@ -78,8 +82,9 @@ export default class Router {
    * Initialize server.
    */
   private initServer(): void {
-    if (process.env.NODE_ENV === 'test') return;
     this._server = http.createServer(this.app);
+
+    if (process.env.NODE_ENV === 'test') return;
 
     const { port } = getConfig();
 

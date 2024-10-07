@@ -6,6 +6,7 @@ const config: JestConfigWithTsJest = {
   moduleDirectories: ['node_modules', 'src'],
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'js', 'ts', 'json'],
   testPathIgnorePatterns: ['build'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!(mongodb-memory-server/index.d.ts))'],
   extensionsToTreatAsEsm: ['.ts'],
   preset: 'ts-jest/presets/default-esm',
   testMatch: ['**/*.test.ts'],

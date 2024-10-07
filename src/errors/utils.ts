@@ -4,7 +4,7 @@ import type * as types from '../types/index.js';
 import type express from 'express';
 
 const handleErr = (err: types.IFullError, res: express.Response): void => {
-  Log.error('Error', err.message, err.stack);
+  Log.error('Handle error', err.message, err.stack);
 
   let error: types.IFullError = err;
 

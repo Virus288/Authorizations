@@ -22,6 +22,6 @@ export default class AddUserController {
 
     const response = new AddUserEntity(result);
 
-    res.status(201).json({ data: response });
+    res.status(200).json({ data: response });
   }
 }

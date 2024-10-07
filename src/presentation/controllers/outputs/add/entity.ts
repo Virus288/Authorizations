@@ -4,6 +4,6 @@ export default class AddUserEntity implements IAddUserEntity {
   id: string;
 
   constructor(data: IAddUserEntity) {
-    this.id = data.id;
+    this.id = data.id.toString();
   }
 }

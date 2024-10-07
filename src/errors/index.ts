@@ -98,3 +98,13 @@ export class IncorrectArgLengthError extends FullError {
     this.status = 400;
   }
 }
+
+export class FourOhFour extends FullError {
+  constructor() {
+    super('FourOhFour');
+    this.message = '';
+    this.name = 'FourOhFour';
+    this.code = '010';
+    this.status = 404;
+  }
+}

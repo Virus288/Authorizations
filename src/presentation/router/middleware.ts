@@ -33,7 +33,7 @@ export default class Middleware {
       Log.time(res.locals.id);
 
       res.once('finish', () => {
-        Log.endTime(res.locals.id, { path: req.path });
+        Log.endTime(res.locals.id, { path: req.originalUrl, method: req.method });
       });
 
       next();
