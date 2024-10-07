@@ -1,9 +1,5 @@
-import Log from './logger/index.js';
-import devConfig from '../../config/devConfig.json' with { type: 'json' };
-import exampleConfig from '../../config/exampleConfig.json' with { type: 'json' };
-import prodConfig from '../../config/prodConfig.json' with { type: 'json' };
-import testDevConfig from '../../config/testConfig.json' with { type: 'json' };
 import type * as types from '../types/index.js';
+import fs from 'fs';
 
 /**
  * Load config from json files.
@@ -13,18 +9,12 @@ import type * as types from '../types/index.js';
 export default function getConfig(): types.IConfigInterface {
   switch (process.env.NODE_ENV) {
     case 'testDev':
-      if (testDevConfig.amqpURI) return testDevConfig;
-      Log.error('Config', 'Config file is incomplete. Using example config');
-      return exampleConfig;
+      return JSON.parse(fs.readFileSync('./config/testConfig.json').toString()) as types.IConfigInterface;
     case 'dev':
     case 'test':
-      if (devConfig.amqpURI) return devConfig;
-      Log.error('Config', 'Config file is incomplete. Using example config');
-      return exampleConfig;
+      return JSON.parse(fs.readFileSync('./config/devConfig.json').toString()) as types.IConfigInterface;
     case 'production':
-      if (prodConfig.amqpURI) return prodConfig;
-      Log.error('Config', 'Config file is incomplete. Using example config');
-      return exampleConfig;
+      return JSON.parse(fs.readFileSync('./config/prodConfig.json').toString()) as types.IConfigInterface;
     default:
       throw new Error('No config files');
   }

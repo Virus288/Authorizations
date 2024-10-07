@@ -10,7 +10,7 @@ import { randomUUID } from 'crypto';
 
 export default class Middleware {
   generateMiddleware(app: Express): void {
-    app.use(express.json({ limit: '500kb' }));
+    app.use(express.json({ limit: '10kb' }));
     app.use(express.urlencoded({ extended: true }));
     app.use(cookieParser());
     app.use(

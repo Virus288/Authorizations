@@ -52,6 +52,7 @@
       "preserveConstEnums": true,
       "removeComments": true,
       "resolveJsonModule": true,
+      "rootDir": ".",
       "skipLibCheck": false,
       "suppressExcessPropertyErrors": false,
       "suppressImplicitAnyIndexErrors": false,
