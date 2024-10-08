@@ -45,11 +45,7 @@ jobs:
         run: |
           mkdir -p config
           echo '{
-            "amqpURI": "rabbitUrl",
-            "redisURI": "redisUrl",
-            "redisTestURI": "redisTesUrl",
-            "accessToken": "accessToken",
-            "refToken": "refreshToken",
+            "port": 200,
             "mongoURI": "mongoUrl"
           }' > config/devConfig.json
           cp config/devConfig.json config/prodConfig.json
@@ -87,7 +83,7 @@ jobs:
           path: config/
 
       - name: Run tests
-        run: apt-get update && apt-get install gdebi-core -y && wget http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0+deb11u1_amd64.deb && gdebi --non-interactive libssl1.1_1.1.1w-0+deb11u1_amd64.deb && MONGOMS_DISTRO=ubuntu-22.04 yarn test:e2e && MONGOMS_DISTRO=ubuntu-22.04 yarn test:unit && MONGOMS_DISTRO=ubuntu-22.04 yarn test:db
+        run: npm install && apt-get update && apt-get install gdebi-core -y && wget http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0+deb11u1_amd64.deb && gdebi --non-interactive libssl1.1_1.1.1w-0+deb11u1_amd64.deb && MONGOMS_DISTRO=ubuntu-22.04 npm run test:e2e && MONGOMS_DISTRO=ubuntu-22.04 npm run test:unit && MONGOMS_DISTRO=ubuntu-22.04 npm run test:db
 
   lint:
     needs: [setup-config]
@@ -115,7 +111,7 @@ jobs:
           path: config/
 
       - name: Lint
-        run: npm run lint
+        run: npm install && npm run lint
 
   build:
     needs: [setup-config, test, lint]
@@ -144,7 +140,7 @@ jobs:
           path: config/
 
       - name: Build
-        run: npm run build
+        run: npm install && npm run build
 
   audit:
     needs: [test, lint]
@@ -168,4 +164,4 @@ jobs:
             ${{ runner.OS }}-node-
 
       - name: Audit
-        run: npm audit
+        run: npm install && npm audit

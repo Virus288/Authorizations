@@ -1,5 +1,4 @@
 {
   "port": 5003,
-  "amqpURI": "amqp://user:pass@server:port",
   "mongoURI": "mongodb://user:pass@ser:port"
 }

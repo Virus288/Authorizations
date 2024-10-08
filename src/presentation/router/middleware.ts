@@ -52,20 +52,23 @@ export default class Middleware {
         if (error.message.includes('is not valid JSON')) {
           Log.error('Middleware', 'Received req is not of json type', error.message, error.stack);
           const { message, name, status } = new IncorrectDataType();
-          return res.status(status).json({ message, name });
+          res.status(status).json({ message, name });
+          return;
         }
         if (error.name === 'SyntaxError') {
           Log.error('Middleware', 'Generic err', error.message, error.stack);
           const { message, code, name, status } = new InternalError();
-          return res.status(status).json({ message, code, name });
+          res.status(status).json({ message, code, name });
+          return;
         }
         if (error.code !== undefined) {
           const { message, code, name, status } = error;
-          return res.status(status).json({ message, code, name });
+          res.status(status).json({ message, code, name });
+          return;
         }
         Log.error('Middleware', 'Generic err', error.message, error.stack);
         const { message, code, name, status } = new InternalError();
-        return res.status(status).json({ message, code, name });
+        res.status(status).json({ message, code, name });
       },
     );
   }
