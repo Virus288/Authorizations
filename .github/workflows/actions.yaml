@@ -46,7 +46,8 @@ jobs:
           mkdir -p config
           echo '{
             "port": 200,
-            "mongoURI": "mongoUrl"
+            "mongoURI": "mongoUrl",
+            "corsOrigin": ["http://localhost:3005"]
           }' > config/devConfig.json
           cp config/devConfig.json config/prodConfig.json
           cp config/devConfig.json config/testConfig.json
