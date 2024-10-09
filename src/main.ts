@@ -1,11 +1,22 @@
 import Bootstrap from './bootstrap.js';
 import Mongo from './infrastructure/mongo/index.js';
 import Router from './presentation/router/index.js';
+import Liveness from './tools/liveness.js';
 import Log from './tools/logger/index.js';
 import State from './tools/state.js';
 import type { IFullError } from './types/index.js';
 
 class App {
+  private _liveness: Liveness | undefined;
+
+  private get liveness(): Liveness | undefined {
+    return this._liveness;
+  }
+
+  private set liveness(val: Liveness | undefined) {
+    this._liveness = val;
+  }
+
   init(): void {
     this.handleInit().catch((err) => {
       const { stack, message } = err as IFullError;
@@ -13,9 +24,7 @@ class App {
       Log.error('Server', message, stack);
       Log.error('Server', JSON.stringify(err));
 
-      return State.kill().catch((error) =>
-        Log.error('Server', "Couldn't kill server", (error as Error).message, (error as Error).stack),
-      );
+      this.close();
     });
   }
 
@@ -35,6 +44,26 @@ class App {
     router.init();
 
     Log.log('Server', 'Server started');
+
+    this.liveness = new Liveness();
+    this.liveness.init();
+
+    this.listenForSignals();
+    State.alive = true;
+  }
+
+  private close(graceful?: boolean): void {
+    if (graceful) Log.log('Server', 'Received signal to die. Gracefully closing');
+
+    State.alive = false;
+    this.liveness?.close();
+    State.kill();
+    this.liveness?.close();
+  }
+
+  private listenForSignals(): void {
+    process.on('SIGTERM', () => this.close(true));
+    process.on('SIGINT', () => this.close(true));
   }
 }
 

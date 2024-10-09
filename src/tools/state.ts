@@ -8,6 +8,15 @@ class State implements IState {
   private _router: Router | null = null;
   private _controllers: Bootstrap | null = null;
   private _mongo: Mongo | null = null;
+  private _alive: boolean = false;
+
+  get alive(): boolean {
+    return this._alive;
+  }
+
+  set alive(val: boolean) {
+    this._alive = val;
+  }
 
   get router(): Router {
     return this._router!;
@@ -33,14 +42,12 @@ class State implements IState {
     this._mongo = value;
   }
 
-  async kill(): Promise<void> {
-    return new Promise((resolve) => {
-      this.router.close();
-      this.controllers.close();
-      Log.log('Server', 'Server closed');
+  kill(): void {
+    this.router.close();
+    this.controllers.close();
+    this.mongo.disconnect();
 
-      resolve();
-    });
+    Log.log('Server', 'Server closed');
   }
 }
 

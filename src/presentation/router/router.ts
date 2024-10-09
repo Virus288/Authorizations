@@ -1,6 +1,7 @@
 import initUserRoutes from './modules/users/index.js';
 import { FourOhFour } from '../../errors/index.js';
 import handleErr from '../../errors/utils.js';
+import State from '../../tools/state.js';
 import type { Router } from 'express';
 
 export default class AppRouter {
@@ -18,6 +19,14 @@ export default class AppRouter {
     initUserRoutes(this.router);
 
     this.initFourOhFour();
+  }
+
+  initHealh(): void {
+    this.router.get('/health', (_req, res) => {
+      const { alive } = State;
+
+      alive ? res.sendStatus(200) : res.sendStatus(500);
+    });
   }
 
   initFourOhFour(): void {
