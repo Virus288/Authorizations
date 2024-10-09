@@ -1,6 +1,8 @@
 import cors from 'cors';
 import express from 'express';
+import helmet from 'helmet';
 import { IncorrectDataType, InternalError } from '../../errors/index.js';
+import getConfig from '../../tools/configLoader.js';
 import Log from '../../tools/logger/index.js';
 import errLogger from '../../tools/logger/logger.js';
 import type { IFullError, IUserLocals } from '../../types/index.js';
@@ -13,8 +15,27 @@ export default class Middleware {
     app.use(express.urlencoded({ extended: true }));
     app.use(
       cors({
-        origin: '*',
+        origin: getConfig().corsOrigin,
         credentials: true,
+      }),
+    );
+
+    const helmetDirectives = helmet.contentSecurityPolicy.getDefaultDirectives();
+    const allowedUrls = getConfig().corsOrigin;
+    app.use(
+      helmet({
+        contentSecurityPolicy: {
+          useDefaults: false,
+          directives: {
+            ...helmetDirectives,
+            'form-action': ["'self'", ...allowedUrls],
+            'script-src': ["'self'", "'unsafe-inline'"],
+            'default-src': ["'self'", 'data:'],
+            'frame-ancestors': ["'self'", ...allowedUrls],
+            'frame-src': ["'self'", ...allowedUrls],
+            'connect-src': ["'self'", ...allowedUrls],
+          },
+        },
       }),
     );
 
@@ -25,7 +46,38 @@ export default class Middleware {
       next();
     });
 
-    // Analuyze
+    app.use((req, _res, next) => {
+      try {
+        const logBody: Record<string, string | Record<string, string>> = {
+          method: req.method,
+          path: req.path,
+          ip: req.ip as string,
+        };
+
+        if (req.query) logBody.query = JSON.stringify(req.query);
+        if (
+          req.body !== undefined &&
+          typeof req.body === 'object' &&
+          Object.keys(req.body as Record<string, string>).length > 0
+        ) {
+          if (req.path.includes('interaction') || req.path.includes('register') || req.path.includes('remove')) {
+            logBody.body = { ...(req.body as Record<string, string>) };
+
+            if (logBody.body.password) {
+              logBody.body.password = '***';
+            }
+          } else {
+            logBody.body = req.body as Record<string, string>;
+          }
+        }
+
+        Log.log('New req', logBody);
+        next();
+      } catch (err) {
+        Log.error('Middleware validation', err);
+      }
+    });
+
     app.use((req: express.Request, res: express.Response<unknown, IUserLocals>, next: express.NextFunction) => {
       res.locals.id = randomUUID();
       Log.time(res.locals.id);

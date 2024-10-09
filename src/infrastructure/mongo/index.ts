@@ -8,8 +8,10 @@ export default class Mongo {
     await this.startServer();
   }
 
-  async disconnect(): Promise<void> {
-    await mongoose.disconnect();
+  disconnect(): void {
+    mongoose.disconnect().catch((err) => {
+      Log.error('Mongo', 'Cannot disconnect', (err as Error).message);
+    });
   }
 
   protected async startServer(): Promise<void> {

@@ -58,7 +58,3 @@ config/testConfig.json
 
 # K8s
 .livenessProbe
-
-# Uploaded files
-uploads
-files

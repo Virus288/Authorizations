@@ -1,4 +1,5 @@
 {
   "port": 5003,
-  "mongoURI": "mongodb://user:pass@ser:port"
+  "mongoURI": "mongodb://user:pass@ser:port",
+  "corsOrigin": ["http://localhost"]
 }
