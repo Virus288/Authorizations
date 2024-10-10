@@ -108,3 +108,13 @@ export class FourOhFour extends FullError {
     this.status = 404;
   }
 }
+
+export class AccountDoesNotExistError extends FullError {
+  constructor(accountId: string) {
+    super('AccountDoesNotExistError');
+    this.message = `Provided account with id ${accountId} does not exist`;
+    this.name = 'AccountDoesNotExistError';
+    this.code = '011';
+    this.status = 400;
+  }
+}

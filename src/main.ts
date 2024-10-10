@@ -1,5 +1,6 @@
 import Bootstrap from './bootstrap.js';
 import Mongo from './infrastructure/mongo/index.js';
+import Redis from './infrastructure/redis/index.js';
 import Router from './presentation/router/index.js';
 import Liveness from './tools/liveness.js';
 import Log from './tools/logger/index.js';
@@ -34,12 +35,16 @@ class App {
     const router = new Router();
     const bootstrap = new Bootstrap();
     const mongo = new Mongo();
+    const redis = new Redis();
 
     State.router = router;
     State.controllers = bootstrap;
     State.mongo = mongo;
+    State.redis = redis;
 
     await mongo.init();
+    await redis.init();
+    await State.initKeys();
     bootstrap.init();
     router.init();
 

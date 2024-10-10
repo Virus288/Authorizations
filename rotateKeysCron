@@ -1,0 +1,1 @@
+0 0 * * 1 cd /usr/src/app && bash ./rotateKeys.sh >> /usr/src/app/cron.log 2>&1

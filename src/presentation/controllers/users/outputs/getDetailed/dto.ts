@@ -1,8 +1,8 @@
-import * as errors from '../../../../errors/index.js';
-import Validation from '../../../../tools/validator.js';
-import type { IGetUserDto } from '../../../../application/user/get/types.js';
+import * as errors from '../../../../../errors/index.js';
+import Validation from '../../../../../tools/validator.js';
+import type { IGetUserDto } from '../../../../../application/user/get/types.js';
 
-export default class GetUserDto implements IGetUserDto {
+export default class GetDetailedUserDto implements IGetUserDto {
   id: string | undefined = undefined;
   name: string | undefined = undefined;
 

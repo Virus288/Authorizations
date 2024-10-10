@@ -1,6 +1,6 @@
 import User from '../../../domain/user/index.js';
 import type { IAddUserDto, IAddUserEntity } from './types.js';
-import type AddUserDto from '../../../presentation/controllers/outputs/add/dto.js';
+import type AddUserDto from '../../../presentation/controllers/users/outputs/add/dto.js';
 import type { IUseCase } from '../../../types/index.js';
 import type { IUserRepository } from '../repository.js';
 

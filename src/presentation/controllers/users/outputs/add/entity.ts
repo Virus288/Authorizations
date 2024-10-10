@@ -1,4 +1,4 @@
-import type { IAddUserEntity } from '../../../../application/user/add/types.js';
+import type { IAddUserEntity } from '../../../../../application/user/add/types.js';
 
 export default class AddUserEntity implements IAddUserEntity {
   id: string;

@@ -6,3 +6,5 @@ export interface IGetUserDto {
 }
 
 export type IGetUserEntity = Omit<IUserEntity, '_id'>;
+
+export type IGetDetailedUserEntity = IUserEntity & { id: string };

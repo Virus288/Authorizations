@@ -41,6 +41,11 @@
     "helmet": "^8.0.0",
     "mongoose": "^8.7.0",
     "node": "22.3.0",
+    "node-jose": "^2.2.0",
+    "oidc-provider": "^8.5.1",
+    "redis": "^4.7.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "winston": "3.15.0",
     "winston-daily-rotate-file": "5.0.0"
   },
@@ -53,7 +58,12 @@
     "@types/express": "5.0.0",
     "@types/mongoose": "^5.11.96",
     "@types/node": "22.7.4",
+    "@types/node-jose": "^1.1.13",
+    "@types/oidc-provider": "^8.5.2",
+    "@types/redis": "^4.0.10",
     "@types/supertest": "^6.0.2",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
     "@typescript-eslint/eslint-plugin": "8.8.1",
     "@typescript-eslint/parser": "8.8.0",
     "concurrently": "^9.0.1",
@@ -78,9 +88,6 @@
     "typescript": "5.6.2"
   },
   "overrides": {
-    "eslint-plugin-import": {
-      "eslint": "^9"
-    },
     "express": {
       "cookie": "0.7.2"
     }

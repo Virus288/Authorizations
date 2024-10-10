@@ -1,5 +1,5 @@
-import Validation from '../../../../tools/validator.js';
-import type { IAddUserDto } from '../../../../application/user/add/types.js';
+import Validation from '../../../../../tools/validator.js';
+import type { IAddUserDto } from '../../../../../application/user/add/types.js';
 
 export default class AddUserDto implements IAddUserDto {
   name: string;
