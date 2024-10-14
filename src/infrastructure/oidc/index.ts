@@ -1,6 +1,6 @@
 import Provider from 'oidc-provider';
 import oidcClaims from './claims.js';
-import { EControllerActions, EControllers } from '../../enums/controllers.js';
+import { EBaseControllerActions, EControllers } from '../../enums/controllers.js';
 import getConfig from '../../tools/configLoader.js';
 import Log from '../../tools/logger/index.js';
 import State from '../../tools/state.js';
@@ -31,7 +31,7 @@ export default class Oidc {
 
     for (const e of errors) {
       provider.on(e, (...err: Record<string, unknown>[]) => {
-        Log.error(e, err);
+        Log.debug(e, err);
       });
     }
     return provider;
@@ -40,9 +40,12 @@ export default class Oidc {
   private async initClaims(): Promise<Configuration> {
     const controller = State.controllers
       ?.resolve(EControllers.OidcClients)
-      ?.resolve(EControllerActions.Get) as GetAllOidcClientController;
+      ?.resolve(EBaseControllerActions.GetAll) as GetAllOidcClientController;
 
-    const clients = await controller.handle();
+    // Because we use classes as entities, we need to move data outside of them. Oidc does not like classes
+    const clients = (await controller.handle()).map((c) => {
+      return { ...c };
+    });
     return oidcClaims(clients as ClientMetadata[]);
   }
 }

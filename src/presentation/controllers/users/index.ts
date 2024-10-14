@@ -17,7 +17,7 @@ export default class UsersController extends AbstractController<enums.EControlle
   private init(model: typeof UserModel): void {
     const repo = new UsersRepository(model);
 
-    this.register(enums.EControllerActions.Get, new GetUsersController(new GetUserUseCase(repo)));
-    this.register(enums.EControllerActions.Add, new AddUserController(new AddUserUseCase(repo)));
+    this.register(enums.EBaseControllerActions.Get, new GetUsersController(new GetUserUseCase(repo)));
+    this.register(enums.EBaseControllerActions.Add, new AddUserController(new AddUserUseCase(repo)));
   }
 }

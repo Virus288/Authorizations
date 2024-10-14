@@ -7,7 +7,7 @@ import type express from 'express';
 
 export default class AddOidcClientController extends AbstractInnerController<
   enums.EControllers.OidcClients,
-  enums.EControllerActions.Add,
+  enums.EBaseControllerActions.Add,
   void,
   express.Request<unknown, unknown, IAddOidcClientDto>
 > {

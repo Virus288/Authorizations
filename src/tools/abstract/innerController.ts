@@ -4,7 +4,7 @@ import type express from 'express';
 
 export default abstract class AbstractInnerController<
   T extends enums.EControllers,
-  N extends enums.EControllerActions,
+  N extends enums.EBaseControllerActions | enums.EOidcControllerActions,
   U = void,
   P = [express.Request, express.Response],
 > implements types.IBaseInnerController<U, P>
@@ -19,7 +19,11 @@ export default abstract class AbstractInnerController<
     return this._useCase;
   }
 
-  async handle(_arg1: express.Request | P, _res?: express.Response): Promise<U> {
+  async handle(
+    _arg1: express.Request<unknown, unknown, unknown> | P,
+    _res?: express.Response<unknown, Record<string, unknown>>,
+    _next?: express.NextFunction,
+  ): Promise<U> {
     return new Promise<U>((resolve) => {
       resolve(undefined as U);
     });

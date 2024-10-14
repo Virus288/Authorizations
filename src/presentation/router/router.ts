@@ -1,6 +1,5 @@
+import initOidcRoutes from './modules/oidc/index.js';
 import initUserRoutes from './modules/users/index.js';
-import { FourOhFour } from '../../errors/index.js';
-import handleErr from '../../errors/utils.js';
 import State from '../../tools/state.js';
 import type { Router } from 'express';
 
@@ -17,8 +16,7 @@ export default class AppRouter {
 
   initRoutes(): void {
     initUserRoutes(this.router);
-
-    this.initFourOhFour();
+    initOidcRoutes(this.router);
   }
 
   initHealh(): void {
@@ -26,12 +24,6 @@ export default class AppRouter {
       const { alive } = State;
 
       alive ? res.sendStatus(200) : res.sendStatus(500);
-    });
-  }
-
-  initFourOhFour(): void {
-    this.router.all('*', (_req, res) => {
-      handleErr(new FourOhFour(), res);
     });
   }
 }

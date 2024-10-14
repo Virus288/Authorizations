@@ -1,4 +1,4 @@
-import { EControllerActions, EControllers } from '../../enums/controllers.js';
+import { EBaseControllerActions, EControllers } from '../../enums/controllers.js';
 import { AccountDoesNotExistError } from '../../errors/index.js';
 import State from '../../tools/state.js';
 import type GetUserController from '../../presentation/controllers/users/get.js';
@@ -19,7 +19,7 @@ class UserAccount implements Account {
     // #TODO This should return client based on scope. I don't use any other scopes currently
     const getUsersController = State.controllers
       .resolve(EControllers.Users)
-      ?.resolve(EControllerActions.Get) as GetUserController;
+      ?.resolve(EBaseControllerActions.Get) as GetUserController;
 
     const account = await getUsersController.getDetailed({ id: this.accountId });
 

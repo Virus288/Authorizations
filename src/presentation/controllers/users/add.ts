@@ -7,7 +7,7 @@ import type express from 'express';
 
 export default class AddUserController extends AbstractInnerController<
   enums.EControllers.Users,
-  enums.EControllerActions.Add,
+  enums.EBaseControllerActions.Add,
   void,
   express.Request<unknown, unknown, IAddUserDto>
 > {

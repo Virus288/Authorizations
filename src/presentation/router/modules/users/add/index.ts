@@ -1,10 +1,10 @@
 import express from 'express';
-import { EControllerActions, EControllers } from '../../../../../enums/index.js';
+import { EBaseControllerActions, EControllers } from '../../../../../enums/index.js';
 import handleErr from '../../../../../errors/utils.js';
 import State from '../../../../../tools/state.js';
 import type * as types from '../../../../../types/index.js';
 
-export default class GetUsers {
+export default class AddUsers {
   private readonly _router: express.Router;
 
   constructor() {
@@ -19,7 +19,7 @@ export default class GetUsers {
   init(): void {
     this.router.post('/', async (req, res) => {
       try {
-        const controller = State.controllers.resolve(EControllers.Users)!.resolve(EControllerActions.Add)!;
+        const controller = State.controllers.resolve(EControllers.Users)!.resolve(EBaseControllerActions.Add)!;
         await controller.handle(req, res);
       } catch (err) {
         handleErr(err as types.IFullError, res);

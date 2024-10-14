@@ -8,7 +8,7 @@ import type express from 'express';
 
 export default class GetUserController extends AbstractInnerController<
   enums.EControllers.Users,
-  enums.EControllerActions.Get,
+  enums.EBaseControllerActions.Get,
   void,
   express.Request<unknown, unknown, IGetUserDto>
 > {

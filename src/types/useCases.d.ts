@@ -7,15 +7,23 @@ import type GetUserUseCase from '../application/user/get/index.js';
 import type * as enums from '../enums';
 
 export interface IUsersUseCase {
-  [enums.EControllerActions.Get]: GetUserUseCase;
-  [enums.EControllerActions.GetAll]: undefined;
-  [enums.EControllerActions.Add]: AddUserUseCase;
+  [enums.EBaseControllerActions.Get]: GetUserUseCase;
+  [enums.EBaseControllerActions.GetAll]: undefined;
+  [enums.EBaseControllerActions.Add]: AddUserUseCase;
+  [enums.EOidcControllerActions.Login]: undefined;
+  [enums.EOidcControllerActions.GetGrant]: undefined;
+  [enums.EOidcControllerActions.Abort]: undefined;
+  [enums.EOidcControllerActions.Confirm]: undefined;
 }
 
 export interface IOidcClientsUseCase {
-  [enums.EControllerActions.Get]: GetOidcClientsUseCase;
-  [enums.EControllerActions.Add]: AddOidcClientsUseCase;
-  [enums.EControllerActions.GetAll]: GetAllOidcClientUseCase;
+  [enums.EBaseControllerActions.Get]: GetOidcClientsUseCase;
+  [enums.EBaseControllerActions.Add]: AddOidcClientsUseCase;
+  [enums.EBaseControllerActions.GetAll]: GetAllOidcClientUseCase;
+  [enums.EOidcControllerActions.Login]: GetUserUseCase;
+  [enums.EOidcControllerActions.GetGrant]: undefined;
+  [enums.EOidcControllerActions.Abort]: undefined;
+  [enums.EOidcControllerActions.Confirm]: undefined;
 }
 
 export interface IInnerControllerUseCase {

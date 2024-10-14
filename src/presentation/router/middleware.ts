@@ -1,15 +1,22 @@
 import cors from 'cors';
 import express from 'express';
+import session from 'express-session';
 import helmet from 'helmet';
 import { IncorrectDataType, InternalError } from '../../errors/index.js';
 import getConfig from '../../tools/configLoader.js';
 import Log from '../../tools/logger/index.js';
 import errLogger from '../../tools/logger/logger.js';
+import State from '../../tools/state.js';
 import type { IFullError, IUserLocals } from '../../types/index.js';
 import type { Express } from 'express';
 import { randomUUID } from 'crypto';
 
 export default class Middleware {
+  static setNoCache(_req: express.Request, res: express.Response, next: express.NextFunction): void {
+    res.set('cache-control', 'no-store');
+    next();
+  }
+
   generateMiddleware(app: Express): void {
     app.use(express.json({ limit: '10kb' }));
     app.use(express.urlencoded({ extended: true }));
@@ -45,6 +52,26 @@ export default class Middleware {
       res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
       next();
     });
+
+    app.use(
+      session({
+        secret: getConfig().session.secret,
+        resave: false,
+        rolling: false,
+        saveUninitialized: false,
+        cookie: {
+          secure: getConfig().session.secured,
+          maxAge: 60 * 60 * 1000,
+        },
+        name: 'monsters.sid',
+      }),
+    );
+    app.set('views', 'public');
+    app.use('/public', express.static('public/static'));
+    app.get('/favicon.ico', (_req, res) => {
+      res.status(404).send();
+    });
+    app.set('view engine', 'ejs');
 
     app.use((req, _res, next) => {
       try {
@@ -88,6 +115,10 @@ export default class Middleware {
 
       next();
     });
+  }
+
+  generateOidcMiddleware(app: Express): void {
+    app.use(State.provider.callback());
   }
 
   generateErrHandler(app: Express): void {

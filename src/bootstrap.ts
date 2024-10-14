@@ -25,7 +25,7 @@ export default class Bootstrap {
     Log.debug('Bootstrap', 'Initializing');
 
     this.register(enums.EControllers.Users, new UsersController(UserModel));
-    this.register(enums.EControllers.OidcClients, new OidcClientController(OidcClientModel));
+    this.register(enums.EControllers.OidcClients, new OidcClientController(OidcClientModel, UserModel));
   }
 
   close(): void {

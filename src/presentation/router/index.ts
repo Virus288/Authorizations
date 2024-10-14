@@ -1,8 +1,10 @@
 import express from 'express';
 import Middleware from './middleware.js';
 import AppRouter from './router.js';
+import Oidc from '../../infrastructure/oidc/index.js';
 import getConfig from '../../tools/configLoader.js';
 import Log from '../../tools/logger/index.js';
+import State from '../../tools/state.js';
 import http from 'http';
 
 export default class Router {
@@ -37,13 +39,16 @@ export default class Router {
     return this.server;
   }
 
-  init(): void {
+  async init(): Promise<void> {
     Log.debug('Router', 'Initializing');
+
+    State.provider = await new Oidc().init();
 
     this.initMiddleware();
     this.initRouter();
     this.initServer();
     this.initErrHandler();
+    this.initOidc();
   }
 
   /**
@@ -76,6 +81,13 @@ export default class Router {
    */
   private initRouter(): void {
     this.router.initRoutes();
+  }
+
+  /**
+   * Init basic routes.
+   */
+  private initOidc(): void {
+    this.middleware.generateOidcMiddleware(this.app);
   }
 
   /**

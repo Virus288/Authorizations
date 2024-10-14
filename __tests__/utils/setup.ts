@@ -9,7 +9,7 @@ beforeAll(async () => {
   State.controllers = new Bootstrap()
   State.mongo = new FakeMongo()
 
-  State.router.init()
+  await State.router.init()
   State.controllers.init()
   await State.mongo.init()
 });

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Authorizations - Error</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Inter", "sans-serif";
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: #f3f4f6;
+
+            height: fit-content;
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+        }
+
+        .container.dark {
+            background: #010b00;
+        }
+
+        .container .left {
+            padding-bottom: 30px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding-bottom: 100px;
+            flex: 1;
+        }
+
+        .container .left h2 {
+
+            color: #374151;
+
+            font-size: 5.8rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .container.dark .left h2 {
+
+            color: #94a3b8;
+        }
+
+        .container .left h2 span {
+            color: #e11d48;
+
+            font-weight: 700;
+        }
+
+        .container.dark .left h2 span {
+            color: #7c3aed;
+            font-weight: 700;
+        }
+
+
+        .container .left .left-header__bottom {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container .left .left-header__bottom span:first-child {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 1.875rem;
+            /* 30px */
+            line-height: 2.25rem;
+            /* 36px */
+        }
+
+        .container.dark .left .left-header__bottom span:first-child {
+
+            color: #e2e8f0;
+        }
+
+        .container .left .left-header__bottom span:last-child {
+
+            color: #94a3b8;
+            margin-top: 8px;
+            font-size: 0.875rem;
+            /* 14px */
+            line-height: 1.25rem;
+            /* 20px */
+        }
+
+        .container.dark .left .left-header__bottom span:last-child {
+            color: #64748b;
+
+        }
+
+
+        .container .left span {
+            color: gray;
+        }
+
+        .container .left form {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex-direction: column;
+
+        }
+
+        .container .left form label {
+            display: flex;
+            flex-direction: column;
+            color: #334155;
+
+            width: 300px;
+            color: #64748b;
+            font-size: 0.875rem;
+            /* 14px */
+            line-height: 1.25rem;
+            /* 20px */
+        }
+
+        .container.dark .left form label {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            width: 300px;
+
+            font-size: 0.875rem;
+            /* 14px */
+            line-height: 1.25rem;
+            /* 20px */
+        }
+
+        .container .left form input {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            height: 3em;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            background: #f9fafb;
+            border: none;
+            padding: 0px 5px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .container.dark .left form input {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            height: 3em;
+            border-radius: 4px;
+            background: #1f1f22;
+            color: #cbd5e1;
+            border: none;
+            padding: 0px 3px;
+
+            font-weight: 600;
+
+        }
+
+
+        .container .left form input::placeholder {
+            color: #cbd5e1;
+            padding: 0px 4px;
+            font-weight: 500;
+        }
+
+        .container .left form .link-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .container .left form .link-container span {
+            font-size: 0.875rem;
+            /* 14px */
+            line-height: 1.25rem;
+            /* 20px */
+            color: #475569;
+        }
+
+        .container.dark .left form .link-container span {
+            font-size: 0.875rem;
+            /* 14px */
+            line-height: 1.25rem;
+            /* 20px */
+
+            color: #94a3b8;
+        }
+
+        .container .left form .link-container span a {
+            text-decoration: none;
+
+            color: #a855f7;
+        }
+
+        .container.dark .left form .link-container span a {
+            text-decoration: none;
+            color: #ddd6fe;
+        }
+
+        .container .left form button {
+            background: #7c3aed;
+            color: white;
+            font-weight: 600;
+            padding: 4px 0px;
+            border-radius: 5px;
+            padding: 6px 0px;
+            border: 1px solid grey;
+            cursor: pointer;
+        }
+
+        .container.dark .left form button {
+            background: #8b5cf6;
+            color: white;
+            font-weight: 600;
+            padding: 4px 0px;
+            border-radius: 5px;
+
+            padding: 6px 0px;
+            cursor: pointer;
+        }
+
+        .error-container {
+            display: flex;
+            display: none;
+            justify-content: center;
+            color: rgb(114, 33, 33);
+            font-weight: 500;
+            font-size: 0.875rem;
+            /* 14px */
+            line-height: 1.25rem;
+            /* 20px */
+        }
+
+        .container .right {
+            flex: 1;
+        }
+
+        .container .right img {
+            height: 90%;
+            width: 90%;
+            object-fit: contain;
+        }
+
+        @media (min-width: 1600px) and (max-width: 1670px) {
+            .container .right {
+                flex: 1;
+                height: 90%;
+                width: 100%;
+
+            }
+        }
+
+        @media (min-width: 1500px) and (max-width: 1590px) {
+            .container .right {
+                flex: 1;
+                height: 80%;
+                width: 100%;
+
+            }
+        }
+
+        @media (min-width: 1400px) and (max-width: 1500px) {
+            .container .right {
+                flex: 1;
+                height: 72%;
+                width: 100%;
+
+            }
+        }
+
+        @media (min-width: 1300px) and (max-width: 1400px) {
+            .container .right {
+                flex: 1;
+                height: 65%;
+                width: 100%;
+
+            }
+        }
+
+        @media (min-width: 1280px) and (max-width: 1300px) {
+            .container .right {
+                flex: 1;
+                height: 65%;
+                width: 100%;
+
+            }
+        }
+
+
+        @media (min-width: 0px) and (max-width: 1280px) {
+            .container .right {
+                display: none;
+            }
+        }
+
+        @media (min-width: 0px) and (max-width: 400px) {
+            .container .left h2 {
+                text-align: center;
+                font-size: 3.4rem;
+                font-weight: 700;
+                margin-bottom: 40px;
+            }
+
+            .container .left .left-header__bottom span:first-child {
+                font-weight: 600;
+                color: #e2e8f0;
+                font-size: 1.375rem;
+                /* 30px */
+                line-height: 2.25rem;
+                /* 36px */
+            }
+
+            .container .left .left-header__bottom span:last-child {
+                color: #94a3b8;
+                margin-top: 8px;
+                font-size: 0.775rem;
+                /* 14px */
+                line-height: 1.25rem;
+                /* 20px */
+            }
+
+            .container .left form label {
+                display: flex;
+                flex-direction: column;
+                color: white;
+                width: 250px;
+                color: #64748b;
+                font-size: 0.875rem;
+                /* 14px */
+                line-height: 1.25rem;
+                /* 20px */
+            }
+        }
+
+        @media (min-width: 400px) and (max-width: 500px) {
+            .container .left h2 {
+                text-align: center;
+                font-size: 3.3rem;
+                font-weight: 700;
+                margin-bottom: 40px;
+            }
+
+            .container .left .left-header__bottom span:first-child {
+                font-weight: 600;
+                color: #e2e8f0;
+                font-size: 1.375rem;
+                /* 30px */
+                line-height: 2.25rem;
+                /* 36px */
+            }
+
+            .container .left .left-header__bottom span:last-child {
+                color: #94a3b8;
+                margin-top: 8px;
+                font-size: 0.775rem;
+                /* 14px */
+                line-height: 1.25rem;
+                /* 20px */
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="left-header">
+                <h2><span>M</span>onsters</h2>
+                <div class="left-header__bottom">
+                    <span>Wild error occurred!</span>
+                    <span class="error-container">
+                        <%= name; %>
+                    </span>
+                    <span>
+                        <%= message; %>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -46,7 +46,7 @@ class App {
     await redis.init();
     await State.initKeys();
     bootstrap.init();
-    router.init();
+    await router.init();
 
     Log.log('Server', 'Server started');
 
@@ -57,9 +57,7 @@ class App {
     State.alive = true;
   }
 
-  private close(graceful?: boolean): void {
-    if (graceful) Log.log('Server', 'Received signal to die. Gracefully closing');
-
+  private close(): void {
     State.alive = false;
     this.liveness?.close();
     State.kill();
@@ -67,8 +65,14 @@ class App {
   }
 
   private listenForSignals(): void {
-    process.on('SIGTERM', () => this.close(true));
-    process.on('SIGINT', () => this.close(true));
+    process.on('SIGTERM', () => {
+      Log.log('Server', 'Received signal SIGTERM. Gracefully closing');
+      this.close();
+    });
+    process.on('SIGINT', () => {
+      Log.log('Server', 'Received signal SIGINT. Gracefully closing');
+      this.close();
+    });
   }
 }
 

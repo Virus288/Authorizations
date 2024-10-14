@@ -64,3 +64,5 @@ yarn test:watch = run tests in 'watch' mode
 ### 5. Additional notes
 
 This service uses oidc as authorization system
+
+Globally overwritten interfaces can be found in src/types/globals

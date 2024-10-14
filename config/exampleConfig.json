@@ -3,5 +3,9 @@
   "mongoURI": "mongodb://user:pass@ser:port",
   "redisURI": "redis://user:password@adress:port",
   "myAddress": "http://localhost",
-  "corsOrigin": ["http://localhost"]
+  "corsOrigin": ["http://localhost"],
+  "session": {
+    "secret": "sessionSecret",
+    "secured": false
+  }
 }

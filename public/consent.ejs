@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authorizations - Login</title>
+    <style>
+        * {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="left-header">
+                <h2><span>M</span>onsters</h2>
+            </div>
+
+            <form autocomplete="off" action="/interaction/<%= uid; %>/confirm" method="post">
+                <button autofocus type="submit" class="login login-submit">Continue</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            const button = document.querySelector('button');
+            button.click();
+        });
+    </script>
+</body>
+
+</html>

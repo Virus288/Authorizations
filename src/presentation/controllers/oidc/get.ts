@@ -6,7 +6,7 @@ import type * as enums from '../../../enums/index.js';
 
 export default class GetOidcClientController extends AbstractInnerController<
   enums.EControllers.OidcClients,
-  enums.EControllerActions.Get,
+  enums.EBaseControllerActions.Get,
   GetOidcClientsEntity | undefined,
   IGetOidcClientDto
 > {
