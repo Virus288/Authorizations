@@ -14,4 +14,5 @@ export enum EOidcControllerActions {
   Login = 'login',
   Confirm = 'confirm',
   Abort = 'abort',
+  Register = 'register',
 }

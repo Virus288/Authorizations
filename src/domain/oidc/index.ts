@@ -1,6 +1,6 @@
 import type { IOidcClientEntity } from './types.js';
 
-export default class OidcClient implements IOidcClientEntity {
+export default class OidcClient implements Omit<IOidcClientEntity, '_id'> {
   readonly _id: string | undefined;
   client_id: string;
   client_secret: string;
@@ -10,8 +10,7 @@ export default class OidcClient implements IOidcClientEntity {
   post_logout_redirect_uris: string[];
   [key: string]: unknown;
 
-  constructor(user: IOidcClientEntity & { id?: string }) {
-    this._id = user.id;
+  constructor(user: IOidcClientEntity) {
     this.client_id = user.client_id;
     this.client_secret = user.client_secret;
     this.grant_types = user.grant_types;

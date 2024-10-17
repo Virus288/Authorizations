@@ -1,5 +1,6 @@
 export type * from './state';
 export type * from './config';
+export type * from './user';
 export type * from './errors';
 export type * from './server';
 export type * from './repository';

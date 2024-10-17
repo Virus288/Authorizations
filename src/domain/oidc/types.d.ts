@@ -1,6 +1,7 @@
 import type mongoose from 'mongoose';
 
 export interface IOidcClientEntity {
+  _id?: string | mongoose.Types.ObjectId;
   client_id: string;
   client_secret: string;
   grant_types: string[];

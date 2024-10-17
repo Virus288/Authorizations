@@ -44,29 +44,17 @@ const claims = (clients: oidc.ClientMetadata[]): oidc.Configuration => {
 
       rpInitiatedLogout: {
         enabled: true,
-        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-        logoutSource: (ctx: oidc.KoaContextWithOIDC, form: string): oidc.CanBePromise<void | undefined> => {
+        logoutSource: (ctx: oidc.KoaContextWithOIDC, form: string): oidc.CanBePromise<void> => {
           ctx.rend;
           ctx.body = `<!DOCTYPE html>
             <head>
               <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-              <title>Monsters - Logout</title>
+              <title>Authorizations - Logout</title>
               <meta content='width=device-width, initial-scale=1' name='viewport'>
             </head>
             <body>
               ${form}
             </body>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  const form = document.querySelector('form')
-                  const input = document.createElement('input')
-                  input.type = 'hidden'
-                  input.name = 'logout'
-                  input.value = 'yes'
-                  form.appendChild(input)
-                  form.submit()
-                });
-              </script>
             </html>`;
         },
       },

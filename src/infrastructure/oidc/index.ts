@@ -14,6 +14,15 @@ export default class Oidc {
   }
 
   private initProvider(claims: Configuration): Provider {
+    const provider = new Provider(getConfig().myAddress.replace(/:\d+/u, ''), claims);
+    provider.proxy = true;
+
+    this.listenForErrors(provider);
+
+    return provider;
+  }
+
+  private listenForErrors(provider: Provider): void {
     const errors = [
       'authorization.error',
       'grant.error',
@@ -26,15 +35,12 @@ export default class Oidc {
       'backchannel.error',
       'server_error',
     ];
-    const provider = new Provider(getConfig().myAddress.replace(/:\d+/u, ''), claims);
-    provider.proxy = true;
 
     for (const e of errors) {
       provider.on(e, (...err: Record<string, unknown>[]) => {
         Log.debug(e, err);
       });
     }
-    return provider;
   }
 
   private async initClaims(): Promise<Configuration> {

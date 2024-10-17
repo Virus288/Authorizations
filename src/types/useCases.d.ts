@@ -1,6 +1,7 @@
 import type AddOidcClientsUseCase from '../application/oidc/add/index.js';
 import type GetOidcClientsUseCase from '../application/oidc/get/index.js';
 import type GetAllOidcClientUseCase from '../application/oidc/getAll/index.js';
+import type RegisterUseCase from '../application/oidc/register/index.js';
 import type AddUserUseCase from '../application/user/add/index.js';
 import type GetUserUseCase from '../application/user/get/index.js';
 
@@ -14,6 +15,7 @@ export interface IUsersUseCase {
   [enums.EOidcControllerActions.GetGrant]: undefined;
   [enums.EOidcControllerActions.Abort]: undefined;
   [enums.EOidcControllerActions.Confirm]: undefined;
+  [enums.EOidcControllerActions.Register]: undefined;
 }
 
 export interface IOidcClientsUseCase {
@@ -24,6 +26,7 @@ export interface IOidcClientsUseCase {
   [enums.EOidcControllerActions.GetGrant]: undefined;
   [enums.EOidcControllerActions.Abort]: undefined;
   [enums.EOidcControllerActions.Confirm]: undefined;
+  [enums.EOidcControllerActions.Register]: RegisterUseCase;
 }
 
 export interface IInnerControllerUseCase {

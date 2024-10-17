@@ -7,7 +7,8 @@ const limiter =
         next();
       }
     : rateLimit({
-        limit: 200,
+        windowMs: 60 * 1000,
+        limit: 30,
         message: { data: 'Too many requests from this IP, please try again in an 1 min' },
         validate: { trustProxy: true },
       });

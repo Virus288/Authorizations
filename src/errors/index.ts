@@ -118,3 +118,23 @@ export class AccountDoesNotExistError extends FullError {
     this.status = 400;
   }
 }
+
+export class IncorrectCredentialsError extends FullError {
+  constructor(message?: string) {
+    super('IncorrectCredentialsError');
+    this.message = message ?? 'Incorrect credentials';
+    this.name = 'IncorrectCredentialsError';
+    this.code = '012';
+    this.status = 400;
+  }
+}
+
+export class UserAlreadyRegisteredError extends FullError {
+  constructor() {
+    super('UserAlreadyRegisteredError');
+    this.message = 'Email already registered';
+    this.name = 'UserAlreadyRegisteredError';
+    this.code = '012';
+    this.status = 400;
+  }
+}

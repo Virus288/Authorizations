@@ -5,6 +5,6 @@ export interface IGetUserDto {
   id?: string;
 }
 
-export type IGetUserEntity = Omit<IUserEntity, '_id'>;
+export type IGetUserEntity = Omit<IUserEntity, '_id' | 'password'>;
 
-export type IGetDetailedUserEntity = IUserEntity & { id: string };
+export type IGetDetailedUserEntity = IUserEntity & { _id: string };

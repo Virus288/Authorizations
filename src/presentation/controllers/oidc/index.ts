@@ -5,9 +5,11 @@ import GetOidcClientsController from './get.js';
 import GetAllOidcClientsController from './getAll.js';
 import GetOidcGrantController from './getGrant.js';
 import LoginOidcController from './login.js';
+import RegisterOidcController from './register.js';
 import AddOidcClientsUseCase from '../../../application/oidc/add/index.js';
 import GetOidcClientsUseCase from '../../../application/oidc/get/index.js';
 import GetAllOidcClientsUseCase from '../../../application/oidc/getAll/index.js';
+import RegisterUseCase from '../../../application/oidc/register/index.js';
 import GetUserUseCase from '../../../application/user/get/index.js';
 import * as enums from '../../../enums/index.js';
 import OidcClientsRepository from '../../../infrastructure/repositories/oidc.js';
@@ -37,5 +39,6 @@ export default class OidcClientsController extends AbstractController<enums.ECon
     this.register(enums.EOidcControllerActions.Confirm, new ConfirmOidcController(undefined));
     this.register(enums.EOidcControllerActions.GetGrant, new GetOidcGrantController(undefined));
     this.register(enums.EOidcControllerActions.Login, new LoginOidcController(new GetUserUseCase(userRepo)));
+    this.register(enums.EOidcControllerActions.Register, new RegisterOidcController(new RegisterUseCase(userRepo)));
   }
 }

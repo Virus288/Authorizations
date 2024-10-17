@@ -7,6 +7,7 @@ import type GetAllOidcClientController from '../presentation/controllers/oidc/ge
 import type GetOidcGrantController from '../presentation/controllers/oidc/getGrant.js';
 import type OidcClientsController from '../presentation/controllers/oidc/index.js';
 import type LoginOidcController from '../presentation/controllers/oidc/login.js';
+import type RegisterOidcController from '../presentation/controllers/oidc/register.js';
 import type AddUserController from '../presentation/controllers/users/add.js';
 import type GetUserController from '../presentation/controllers/users/get.js';
 import type UsersController from '../presentation/controllers/users/index.js';
@@ -27,6 +28,7 @@ export interface IUsersController {
   [enums.EOidcControllerActions.Confirm]: undefined;
   [enums.EOidcControllerActions.GetGrant]: undefined;
   [enums.EOidcControllerActions.Login]: undefined;
+  [enums.EOidcControllerActions.Register]: undefined;
 }
 
 export interface IOidcClientsController {
@@ -37,6 +39,7 @@ export interface IOidcClientsController {
   [enums.EOidcControllerActions.Login]: LoginOidcController;
   [enums.EOidcControllerActions.Confirm]: ConfirmOidcController;
   [enums.EOidcControllerActions.Abort]: AbortOidcController;
+  [enums.EOidcControllerActions.Register]: RegisterOidcController;
 }
 
 export interface IInnerController {

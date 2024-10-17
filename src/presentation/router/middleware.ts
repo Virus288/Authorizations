@@ -57,13 +57,14 @@ export default class Middleware {
       session({
         secret: getConfig().session.secret,
         resave: false,
-        rolling: false,
-        saveUninitialized: false,
+        rolling: true,
+        saveUninitialized: true,
         cookie: {
           secure: getConfig().session.secured,
+          httpOnly: true,
           maxAge: 60 * 60 * 1000,
         },
-        name: 'monsters.sid',
+        name: 'auth.sid',
       }),
     );
     app.set('views', 'public');

@@ -28,7 +28,7 @@ class UserAccount implements Account {
     return new Promise((resolve) => {
       resolve({
         ...account,
-        sub: account.id,
+        sub: account._id,
       });
     });
   }

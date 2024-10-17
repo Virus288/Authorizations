@@ -16,7 +16,7 @@ export default class AddUserUseCase implements IUseCase<IAddUserDto, IAddUserEnt
   }
 
   async execute(input: AddUserDto): Promise<IAddUserEntity> {
-    const user = new User(input.name);
+    const user = new User(input);
 
     const result = await this.userRepository.add(user);
 

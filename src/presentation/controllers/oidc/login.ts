@@ -1,4 +1,6 @@
+import bcrypt from 'bcrypt';
 import LoginDto from './outputs/login/dto.js';
+import * as errors from '../../../errors/index.js';
 import AbstractInnerController from '../../../tools/abstract/innerController.js';
 import Log from '../../../tools/logger/index.js';
 import State from '../../../tools/state.js';
@@ -13,10 +15,7 @@ export default class LoginController extends AbstractInnerController<
   enums.EOidcControllerActions.Login,
   void
 > {
-  override async handle(
-    req: express.Request<unknown, unknown, ILoginDto>,
-    res: express.Response<unknown, types.IUserLocals>,
-  ): Promise<void> {
+  override async handle(req: express.Request<unknown, unknown, ILoginDto>, res: types.IResponse): Promise<void> {
     const { provider } = State;
 
     try {
@@ -26,6 +25,8 @@ export default class LoginController extends AbstractInnerController<
       if (!account) {
         throw new Error('Missing account with provided id');
       }
+
+      await this.compare(data.password, account.password);
 
       req.session.userId = account._id.toString();
       const details = await provider.interactionDetails(req, res);
@@ -70,5 +71,11 @@ export default class LoginController extends AbstractInnerController<
         });
       }
     }
+  }
+
+  private async compare(password: string, hashed: string): Promise<void> {
+    const auth = await bcrypt.compare(password, hashed);
+
+    if (!auth) throw new errors.IncorrectCredentialsError();
   }
 }

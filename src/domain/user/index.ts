@@ -1,11 +1,13 @@
 import type { IUserEntity } from './types.js';
 
-export default class User implements IUserEntity {
-  readonly _id: string | undefined;
-  readonly name: string;
+export default class User implements Omit<IUserEntity, '_id'> {
+  readonly login: string;
+  readonly email: string;
+  readonly password: string;
 
-  constructor(name: string, id?: string) {
-    this.name = name;
-    this._id = id;
+  constructor(data: IUserEntity) {
+    this.login = data.login;
+    this.email = data.email;
+    this.password = data.password;
   }
 }

@@ -7,9 +7,8 @@ import type { FilterQuery } from 'mongoose';
 
 export default class UsersRepository
   extends AbstractRepository<IUser, typeof User, enums.EModules.User>
-  implements IUserRepository
-{
-  getByName(name: string): Promise<IUser | null> {
-    return this.model.findOne({ name } as FilterQuery<Record<string, unknown>>).lean();
+  implements IUserRepository {
+  async getByName(login: string): Promise<IUser | null> {
+    return this.model.findOne({ login } as FilterQuery<Record<string, unknown>>).lean();
   }
 }
