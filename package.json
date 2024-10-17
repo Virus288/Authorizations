@@ -20,7 +20,9 @@
     "test": "echo 'If you want to run all the tests, please use makefile'",
     "test:e2e": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand --config __tests__/jest.config.e2e.ts",
     "test:unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --config __tests__/jest.config.unit.ts",
-    "test:db": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand --config __tests__/jest.config.db.ts"
+    "test:db": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand --config __tests__/jest.config.db.ts",
+    "migrate": "node src/migrations/index.js",
+    "migrate:dev": "cross-env NODE_ENV=development node build/src/migrations/index.js"
   },
   "lint-staged": {
     "*.ts": [

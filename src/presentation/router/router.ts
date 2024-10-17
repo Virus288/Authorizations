@@ -1,5 +1,4 @@
 import initOidcRoutes from './modules/oidc/index.js';
-import initUserRoutes from './modules/users/index.js';
 import State from '../../tools/state.js';
 import type { Router } from 'express';
 
@@ -15,7 +14,6 @@ export default class AppRouter {
   }
 
   initRoutes(): void {
-    initUserRoutes(this.router);
     initOidcRoutes(this.router);
   }
 
