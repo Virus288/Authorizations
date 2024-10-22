@@ -21,9 +21,7 @@ class App {
   init(): void {
     this.handleInit().catch((err) => {
       const { stack, message } = err as IFullError;
-      Log.error('Server', 'Err while initializing app');
-      Log.error('Server', message, stack);
-      Log.error('Server', JSON.stringify(err));
+      Log.error('Server', 'Err while initializing app', message, stack);
 
       this.close();
     });

@@ -1,5 +1,5 @@
-import express from 'express';
 import { EControllers, EOidcControllerActions } from '../../../../../enums/index.js';
+import AbstractRouter from '../../../../../tools/abstract/router.js';
 import Log from '../../../../../tools/logger/index.js';
 import State from '../../../../../tools/state.js';
 import Middleware from '../../../middleware.js';
@@ -7,16 +7,10 @@ import limitRate from '../../../utils.js';
 import type * as types from '../../../../../types/index.js';
 import type ConfirmController from '../../../../controllers/oidc/confirm.js';
 
-export default class Confirm {
-  private readonly _router: express.Router;
-
+export default class Confirm extends AbstractRouter {
   constructor() {
-    this._router = express.Router();
+    super();
     this.init();
-  }
-
-  get router(): express.Router {
-    return this._router;
   }
 
   init(): void {

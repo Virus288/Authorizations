@@ -14,7 +14,7 @@ export default class RegisterController extends AbstractInnerController<
   override async handle(req: express.Request<unknown, unknown, IRegisterDto>, res: types.IResponse): Promise<void> {
     const data = new RegisterDto(req.body);
 
-    await this.useCase.validate(data.login);
+    await this.useCase.validate(data.login, data.email);
 
     await this.useCase.execute({ ...data, password: this.hashPassword(data.password) });
 

@@ -3,8 +3,8 @@ import Validation from '../../../../../tools/validator.js';
 import type { IGetUserDto } from '../../../../../application/user/get/types.js';
 
 export default class GetDetailedUserDto implements IGetUserDto {
-  id: string | undefined = undefined;
-  name: string | undefined = undefined;
+  readonly id: string | undefined = undefined;
+  readonly name: string | undefined = undefined;
 
   constructor(data: IGetUserDto) {
     this.id = data.id;

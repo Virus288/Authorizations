@@ -11,20 +11,20 @@
     <div class="container">
         <div class="left">
             <div class="left-header">
-                <h2><span>M</span>onsters</h2>
+                <h2>Authorizations</h2>
             </div>
 
             <form autocomplete="off" action="/interaction/<%= uid; %>/confirm" method="post">
-                <button autofocus type="submit" class="login login-submit">Continue</button>
+                <ul>
+                    <% for(const scope of params.scope.split(' ')) { %>
+                        <li><%= scope %></li>
+                    <% } %>
+                </ul>
+                <button type="submit">Approve</button>
+                <button type="submit" name="reject" value="true">Deny</button>
             </form>
         </div>
     </div>
-    <script>
-        window.addEventListener('load', () => {
-            const button = document.querySelector('button');
-            button.click();
-        });
-    </script>
 </body>
 
 </html>

@@ -13,9 +13,10 @@ beforeAll(async () => {
   State.controllers = new Bootstrap()
   State.mongo = new FakeMongo()
 
+  // Register controller for oidc to properly start
   State.controllers.register(enums.EControllers.OidcClients, new OidcClientsController(OidcClientModel, UserModel));
 
-  await State.router.init()
   State.controllers.init()
   await State.mongo.init()
+  await State.router.init()
 });

@@ -1,22 +1,16 @@
-import express from 'express';
 import { EControllers, EOidcControllerActions } from '../../../../../enums/index.js';
 import handleErr from '../../../../../errors/utils.js';
+import AbstractRouter from '../../../../../tools/abstract/router.js';
 import State from '../../../../../tools/state.js';
 import Middleware from '../../../middleware.js';
 import limitRate from '../../../utils.js';
 import type RegisterController from '../../../..//controllers/oidc/register.js';
 import type * as types from '../../../../../types/index.js';
 
-export default class Register {
-  private readonly _router: express.Router;
-
+export default class Register extends AbstractRouter {
   constructor() {
-    this._router = express.Router();
+    super();
     this.init();
-  }
-
-  get router(): express.Router {
-    return this._router;
   }
 
   init(): void {

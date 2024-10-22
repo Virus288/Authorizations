@@ -1,10 +1,10 @@
 import User from '../../../domain/user/index.js';
-import { UserAlreadyRegisteredError } from '../../../errors/index.js';
+import { AlreadyRegisteredError } from '../../../errors/index.js';
 import type { IRegisterDto } from './types.js';
 import type { IUserRepository } from '../../../application/user/repository.js';
 import type { IUseCase } from '../../../types/index.js';
 
-export default class RegisterUseCase implements IUseCase<IRegisterDto, unknown> {
+export default class RegisterUseCase implements IUseCase<IRegisterDto, { id: string }> {
   private readonly _userRepository: IUserRepository;
 
   constructor(userRepository: IUserRepository) {
@@ -29,9 +29,11 @@ export default class RegisterUseCase implements IUseCase<IRegisterDto, unknown> 
     };
   }
 
-  async validate(login: string): Promise<void> {
-    const alreadyExists = await this.userRepository.getByName(login);
+  async validate(login: string, email: string): Promise<void> {
+    const loginTaken = await this.userRepository.getByName(login);
+    const emailTaken = await this.userRepository.getByEmail(email);
 
-    if (!alreadyExists) throw new UserAlreadyRegisteredError();
+    if (loginTaken) throw new AlreadyRegisteredError('Login');
+    if (emailTaken) throw new AlreadyRegisteredError('Email');
   }
 }

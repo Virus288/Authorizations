@@ -3,13 +3,13 @@ import type { IAddOidcClientDto } from '../../../../../application/oidc/add/type
 
 export default class AddOidcClientDto implements IAddOidcClientDto {
   readonly _id: string | undefined;
-  client_id: string;
-  client_secret: string;
-  grant_types: string[];
-  scope: string;
-  redirect_uris: string[];
-  post_logout_redirect_uris: string[];
-  [key: string]: unknown;
+  readonly client_id: string;
+  readonly client_secret: string;
+  readonly grant_types: string[];
+  readonly scope: string;
+  readonly redirect_uris: string[];
+  readonly post_logout_redirect_uris: string[];
+  readonly [key: string]: unknown;
 
   constructor(data: IAddOidcClientDto) {
     this.client_id = data.client_id;

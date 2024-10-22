@@ -1,5 +1,6 @@
 import type * as enums from '../../enums/index.js';
 import type * as types from '../../types/index.js';
+import type mongoose from 'mongoose';
 import type { Document, Model, FilterQuery } from 'mongoose';
 
 export default abstract class AbstractRepository<T extends Document, U extends Model<T>, Z extends enums.EModules>
@@ -15,9 +16,9 @@ export default abstract class AbstractRepository<T extends Document, U extends M
     return this._model;
   }
 
-  async get(_id: unknown): Promise<types.IRepositoryGetData[Z] | null> {
+  async get(_id: string | mongoose.Types.ObjectId): Promise<types.IRepositoryGetData[Z] | null> {
     return this.model
-      .findOne({ _id } as FilterQuery<Record<string, unknown>>)
+      .findOne({ _id } as FilterQuery<Record<string, string | mongoose.Types.ObjectId>>)
       .select({ __v: false })
       .lean() as Promise<types.IRepositoryGetData[Z] | null>;
   }
